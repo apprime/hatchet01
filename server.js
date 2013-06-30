@@ -1,29 +1,17 @@
-var http = require('http');
-// var routing = require('routing');
-var server = http.createServer(onRequest).listen(1337);
+var Http = require('http');
+var Router = require('./Routing/Routing.js');
+var Fs= require('fs');
 
+var server;
+var router = new Router("Controllers/", Fs, function(){
+	server = Http.createServer(onRequest).listen(1337);
+});
+//TODO: Serve favicon
 
-
-
-/*
-	TODO
-	1. Identify what kind of event
-	2. Send onwards to correct event handler
-	3. Retreive data from whatever handler
-	4. Build Head and Body for Response
-	5. End response
-*/
 function onRequest(req, res){
 
-	//1 Route to correct handler for path
-	console.log(req.url);
-	var bask = routes[req.url](req, res);
-	
-	if(req.url != "/favicon.ico"){
-		res.writeHead(200, {"Content-Type": "text/plain"});
-		res.write(bask);
-		res.end();
-	}
+	router.delegate();
+	res.end();
 }
 /*
 function route(incoming, req ,res){
@@ -46,12 +34,7 @@ function initRoutes(controllersPath)
 }
 
 //TEMPORARY UNTIL initRoutes IS WORKING
-var routes = {
-	"/": function(req, res){ return "index called"; },
-	"/index": function(req, res){ return "index called";} ,
-	"/other": function(req, res){ return "other called";},
-	"/favicon.ico": function(req, res){ return "favicon requested";}
-}
+
 
 var options = 
 {
