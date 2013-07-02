@@ -1,6 +1,6 @@
 module.exports = {
 
-	"Default" : function (req, res) {
+	"default" : function (req, res, params) {
 		switch(req.method)
 		{
 			case "GET": return "GET";
@@ -11,8 +11,7 @@ module.exports = {
 		}
 	},
 	
-	"Action1" : function (req, res) {
-		console.log(req.method);
+	"action1" : function (req, res, params) {
 		switch(req.method)
 		{
 			case "GET": return "GET";

@@ -3,98 +3,18 @@ var Router = require('./Routing/Routing.js');
 var Fs= require('fs');
 
 var server;
-var router = new Router("Controllers/", Fs, function(){
+var router = new Router("Controllers/", "Models/", Fs, function(){
+	console.log("Routing complete");
 	server = Http.createServer(onRequest).listen(1337);
+	console.log("[SERVER ONLINE]");
 });
-//TODO: Serve favicon
 
 function onRequest(req, res){
-
-	router.delegate();
+	console.log("Request Received");
+	router.delegate(req, res);
 	res.end();
+	console.log("Response Sent");
 }
-/*
-function route(incoming, req ,res){
-	incoming(req, res);
-};
-
-*/
-
-/*
-	TODO
-	1. Get filenames from all files in /controllers
-	2. Match them with functions
-	3. functions contain something of value for res send
-	4. Handle favicon request somehow
-	5. Put all this in a routing.js utility
-*/
-function initRoutes(controllersPath)
-{
-	//TODO
-}
-
-//TEMPORARY UNTIL initRoutes IS WORKING
-
-
-var options = 
-{
-	'hostname': 'www.google.com',
-	'port': 80,
-	'path': '/',
-	'method': 'Get'
-};
-
-function getGoogle(request, response){
-	var req = http.request(options, function(res) {
-		console.log('STATUS: ' + res.statusCode);
-		console.log('HEADERS: ' + JSON.stringify(res.headers));
-		res.setEncoding('utf8');
-		res.on('data', function (chunk) {
-		console.log('BODY: ' + chunk);
-		});
-	});
-
-	req.on('error', function(e) {
-		console.log('problem with request: ' + e.message);
-	});
-
-	// write data to request body
-	req.write('data\n');
-	req.write('data\n');
-	req.end();
-}
-
-function blah (request)
-{
-	var string = "Here is some stuff:\n";
-	string += "HEADERS: \n";
-	for( i in request.headers){
-		string += i +": ";
-		string += request.headers[i] +"\n";
-	}
-	string += "\n\n";
-	string += "METHOD: " +request.method +"\n\n";
-	string += "URL: " +request.url +"\n\n";
-	string += "STATUS CODE: " +request.status +"\n\n";
-	
-
-	for( i in request){
-		string += i +": ";
-		string += request[i] +"\n";
-	}
-	return string;
-}
-
-
-//	(1)onRequest receives a request
-//	(2)Sort out path for request and send to correct controller
-//	(3)Sort out Get or Post(or whatever) and use correct action
-//	(4)Fetch model for controller/action
-//	(5)Build view based on model and request params
-//	(6)Collapse back to onRequest and send response
-
-
-
 
 /*
 100: Continue

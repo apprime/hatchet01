@@ -1,0 +1,5 @@
+The Router module automatically loads all files into the system om startup. Every controller becomes a valid extension to your URL. Beyond this point, every method inside the controller becomes a valid second extension and further parameters are split into an array and passed to the relevant method ((ie www.mydomain.com/{controller}/{action}/{param1}/{param2}).
+
+By design, you must have a controller called 'index' and one called 'LoadError'. This can be altered in the Routing.js if need be.
+
+The design also requires each controller to have one model with the same name in the Models folder. That model can then import other models as much as it wants.

@@ -1,6 +1,6 @@
 module.exports = {
 	
-	"Default" : function(req, res){ 
+	'default' : function(req, res, model, params){ 
 		switch(req.method)
 		{
 			case "GET": return "GET";
@@ -10,7 +10,9 @@ module.exports = {
 				return "Request Method invalid";
 		}
 	},
-	"Action1" : function(req, res){
+	'drive' : function(req, res, model, params){
+		var c = new model.car("blue", 150);
+
 		switch(req.method)
 		{
 			case "GET": return "GET";
